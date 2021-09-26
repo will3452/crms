@@ -32,8 +32,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         NovaSettings::addSettingsFields([
             Image::make('Logo'),
 
-            // Select::make('Status')
-            //     ->options(Status::get()->pluck('label', 'id')),
+            Select::make('Status')
+                ->options(Status::get()->pluck('label', 'id')),
 
             Text::make('System Name')
                 ->required(),
@@ -146,7 +146,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
 
         return [
-            // new BackupTool(),
+             new BackupTool(),
             (new NovaSettings)->canSee(function () {
                 return auth()->id() == 1;
             }),
