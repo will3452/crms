@@ -167,6 +167,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function register()
     {
-        //
+        //sample
     }
 }
