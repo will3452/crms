@@ -12,11 +12,13 @@ use Ericlagarda\NovaTextCard\TextCard;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use OptimistDigital\NovaSettings\NovaSettings;
+use Spatie\BackupTool\BackupTool;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -146,7 +148,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
 
         return [
-             new BackupTool(),
+            new BackupTool(),
             (new NovaSettings)->canSee(function () {
                 return auth()->id() == 1;
             }),
