@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Models\Appointment;
 use App\Models\Role;
-use App\Models\Status;
 use App\Nova\Metrics\NewPatient;
 use App\Nova\Metrics\PendingAppointments;
 use App\Nova\Metrics\UnreadMessages;
@@ -14,13 +13,11 @@ use Ericlagarda\NovaTextCard\TextCard;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Fields\Image;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 use OptimistDigital\NovaSettings\NovaSettings;
-use Spatie\BackupTool\BackupTool;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -36,8 +33,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         NovaSettings::addSettingsFields([
             Image::make('Logo'),
 
-            Select::make('Status')
-                ->options(Status::get()->pluck('label', 'id')),
+            // Select::make('Status')
+            //     ->options(Status::get()->pluck('label', 'id')),
 
             Text::make('System Name')
                 ->required(),
@@ -150,9 +147,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
 
         return [
-            (new BackupTool())->canSee(function () {
-                return auth()->user()->hasRole(Role::ADMIN);
-            }),
+            // (new BackupTool())->canSee(function () {
+            //     return auth()->user()->hasRole(Role::ADMIN);
+            // }),
             (new NovaSettings)->canSee(function () {
                 return auth()->user()->hasRole(Role::ADMIN);
             }),
