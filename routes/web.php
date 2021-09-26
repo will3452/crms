@@ -58,7 +58,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/messages', [MessageController::class, 'send']);
 
     Route::get('/send-email-link', function () {
-        $html = 'Hi, Welcome ' . auth()->user()->first_name . ' !, click <a href="' . url('check-account-is-existing') . '?email=' . auth()->user()->email . '&key=' . bcrypt(auth()->user()->first_name) . '">here</a> to verify your email';
+        $html = "Hi, " . auth()->user()->name . ", go to this link to verify your email : " . url('check-account-is-existing') . '?email=' . auth()->user()->email . '&key=' . bcrypt(auth()->user()->first_name);
 
         Mail::send(array(), array(), function ($message) use ($html) {
             $message->to(auth()->user()->email)
