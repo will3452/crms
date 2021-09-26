@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Models\Appointment;
-use App\Models\Status;
 use App\Nova\Metrics\NewPatient;
 use App\Nova\Metrics\PendingAppointments;
 use App\Nova\Metrics\UnreadMessages;
@@ -13,7 +12,6 @@ use Ericlagarda\NovaTextCard\TextCard;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Fields\Image;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Nova;
@@ -34,8 +32,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         NovaSettings::addSettingsFields([
             Image::make('Logo'),
 
-            Select::make('Status')
-                ->options(Status::get()->pluck('label', 'id')),
+            // Select::make('Status')
+            //     ->options(Status::get()->pluck('label', 'id')),
 
             Text::make('System Name')
                 ->required(),
