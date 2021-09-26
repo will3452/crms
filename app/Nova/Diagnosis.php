@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
 
 class Diagnosis extends Resource
 {
@@ -25,7 +24,7 @@ class Diagnosis extends Resource
      */
     public function title()
     {
-        return "$this->name - " . Str::limit($this->description, 50);
+        return $this->name;
     }
 
     /**
@@ -36,7 +35,6 @@ class Diagnosis extends Resource
     public static $search = [
         'id',
         'name',
-        'description',
     ];
 
     /**
@@ -50,9 +48,6 @@ class Diagnosis extends Resource
         return [
             Text::make('Name')
                 ->sortable()
-                ->required(),
-
-            Textarea::make('Description')
                 ->required(),
 
             BelongsToMany::make('Medicines'),
