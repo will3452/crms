@@ -35,6 +35,8 @@
         "michielfb/laravel-nova-time-field": "^1.2",
         "optimistdigital/nova-settings": "^3.2",
         "realrashid/sweet-alert": "^4.0",
+        "spatie/laravel-backup": "^6.16",
+        "spatie/nova-backup-tool": "^4.1",
         "ynacorp/nova-swatches": "^1.0"
     },
     "require-dev": {
