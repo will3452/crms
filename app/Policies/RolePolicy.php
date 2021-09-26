@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Symptom;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class SymptomPolicy
+class RolePolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class SymptomPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->can('view any symptom');
+        return $user->can('view any role');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Symptom  $medicine
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Symptom $medicine)
+    public function view(User $user, Role $role)
     {
-        return $user->can('view symptom');
+        return $user->can('view role');
     }
 
     /**
@@ -41,30 +41,30 @@ class SymptomPolicy
      */
     public function create(User $user)
     {
-        return $user->can('create symptom');
+        return $user->can('create role');
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Symptom  $medicine
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Symptom $medicine)
+    public function update(User $user, Role $role)
     {
-        return $user->can('update symptom');
+        return $user->can('update role');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Symptom  $medicine
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Symptom $medicine)
+    public function delete(User $user, Role $role)
     {
-        return $user->can('delete symptom');
+        return $user->can('delete role');
     }
 }

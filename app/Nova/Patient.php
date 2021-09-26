@@ -2,10 +2,9 @@
 
 namespace App\Nova;
 
-use App\Nova\Actions\AssignRole;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Select;
@@ -13,10 +12,8 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 
-class User extends Resource
+class Patient extends Resource
 {
-    public static $group = "Admininstrator";
-
     /**
      * The model the resource corresponds to.
      *
@@ -24,14 +21,21 @@ class User extends Resource
      */
     public static $model = \App\Models\User::class;
 
+    public static $group = "Patient management";
+
     public function title()
     {
         return "$this->first_name $this->last_name";
     }
 
-    public function authorizedToAttachAny(NovaRequest $request, $model)
+    public static function label()
     {
-        return false;
+        return 'Patients';
+    }
+
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        return $query->where('type', '!=', 'admin')->whereNotNull('is_approved');
     }
 
     /**
@@ -111,7 +115,7 @@ class User extends Resource
                 ->exceptOnForms()
                 ->hideFromIndex(),
 
-            BelongsToMany::make("Roles"),
+            HasMany::make('User Diagnoses', 'diagnoses'),
         ];
     }
 
@@ -157,7 +161,6 @@ class User extends Resource
     public function actions(Request $request)
     {
         return [
-            (new AssignRole()),
             (new DownloadExcel()),
         ];
     }

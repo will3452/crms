@@ -18,7 +18,7 @@ class MessagePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->id == 1;
+        return $user->can('view any message');
     }
 
     /**
@@ -30,7 +30,7 @@ class MessagePolicy
      */
     public function view(User $user, Message $message)
     {
-        return $user->id == 1;
+        return $user->can('view message');
     }
 
     /**
@@ -41,7 +41,7 @@ class MessagePolicy
      */
     public function create(User $user)
     {
-        return $user->id == 1;
+        return $user->can('create message');
 
     }
 
@@ -54,7 +54,7 @@ class MessagePolicy
      */
     public function update(User $user, Message $message)
     {
-        return $user->id == 1;
+        return $user->can('update message');
     }
 
     /**
@@ -66,30 +66,7 @@ class MessagePolicy
      */
     public function delete(User $user, Message $message)
     {
-        return $user->id == 1;
+        return $user->can('delete message');
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Message  $message
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Message $message)
-    {
-        return $user->id == 1;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Message  $message
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Message $message)
-    {
-        return $user->id == 1;
-    }
 }

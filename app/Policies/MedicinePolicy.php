@@ -18,7 +18,7 @@ class MedicinePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->id == 1;
+        return $user->can('view any medicine');
     }
 
     /**
@@ -30,7 +30,7 @@ class MedicinePolicy
      */
     public function view(User $user, Medicine $medicine)
     {
-        return $user->id == 1;
+        return $user->can('view medicine');
     }
 
     /**
@@ -41,7 +41,7 @@ class MedicinePolicy
      */
     public function create(User $user)
     {
-        return $user->id == 1;
+        return $user->can('create medicine');
 
     }
 
@@ -54,7 +54,7 @@ class MedicinePolicy
      */
     public function update(User $user, Medicine $medicine)
     {
-        return $user->id == 1;
+        return $user->can('update medicine');
     }
 
     /**
@@ -66,30 +66,6 @@ class MedicinePolicy
      */
     public function delete(User $user, Medicine $medicine)
     {
-        return $user->id == 1;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Medicine  $medicine
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Medicine $medicine)
-    {
-        return $user->id == 1;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Medicine  $medicine
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Medicine $medicine)
-    {
-        return $user->id == 1;
+        return $user->can('delete medicine');
     }
 }

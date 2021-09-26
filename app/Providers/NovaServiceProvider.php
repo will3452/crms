@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Appointment;
+use App\Models\Role;
 use App\Models\Status;
 use App\Nova\Metrics\NewPatient;
 use App\Nova\Metrics\PendingAppointments;
@@ -149,9 +150,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
 
         return [
-            new BackupTool(),
+            (new BackupTool())->canSee(function () {
+                return auth()->user()->hasRole(Role::ADMIN);
+            }),
             (new NovaSettings)->canSee(function () {
-                return auth()->id() == 1;
+                return auth()->user()->hasRole(Role::ADMIN);
             }),
             new NovaBreadcrumbs,
         ];

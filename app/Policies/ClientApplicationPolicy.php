@@ -18,7 +18,7 @@ class ClientApplicationPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->id == 1;
+        return $user->can('view any client application');
     }
 
     /**
@@ -30,7 +30,7 @@ class ClientApplicationPolicy
      */
     public function view(User $user, ClientApplication $clientApplication)
     {
-        return $user->id == 1;
+        return $user->can('view client application');
     }
 
     /**
@@ -41,7 +41,7 @@ class ClientApplicationPolicy
      */
     public function create(User $user)
     {
-        return $user->id == 1;
+        return $user->can('create client application');
 
     }
 
@@ -54,7 +54,7 @@ class ClientApplicationPolicy
      */
     public function update(User $user, ClientApplication $clientApplication)
     {
-        return $user->id == 1;
+        return $user->can('update client application');
     }
 
     /**
@@ -66,30 +66,6 @@ class ClientApplicationPolicy
      */
     public function delete(User $user, ClientApplication $clientApplication)
     {
-        return $user->id == 1;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\ClientApplication  $clientApplication
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, ClientApplication $clientApplication)
-    {
-        return $user->id == 1;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\ClientApplication  $clientApplication
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, ClientApplication $clientApplication)
-    {
-        return $user->id == 1;
+        return $user->can('delete client application');
     }
 }

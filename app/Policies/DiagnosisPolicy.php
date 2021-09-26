@@ -18,7 +18,7 @@ class DiagnosisPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->id == 1;
+        return $user->can('view any diagnosis');
     }
 
     /**
@@ -30,7 +30,7 @@ class DiagnosisPolicy
      */
     public function view(User $user, Diagnosis $diagnosis)
     {
-        return $user->id == 1;
+        return $user->can('view diagnosis');
     }
 
     /**
@@ -41,7 +41,7 @@ class DiagnosisPolicy
      */
     public function create(User $user)
     {
-        return $user->id == 1;
+        return $user->can('create diagnosis');
     }
 
     /**
@@ -53,7 +53,7 @@ class DiagnosisPolicy
      */
     public function update(User $user, Diagnosis $diagnosis)
     {
-        return $user->id == 1;
+        return $user->can('update diagnosis');
     }
 
     /**
@@ -65,30 +65,6 @@ class DiagnosisPolicy
      */
     public function delete(User $user, Diagnosis $diagnosis)
     {
-        return $user->id == 1;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Diagnosis  $diagnosis
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Diagnosis $diagnosis)
-    {
-        return $user->id == 1;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Diagnosis  $diagnosis
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Diagnosis $diagnosis)
-    {
-        return $user->id == 1;
+        return $user->can('delete diagnosis');
     }
 }

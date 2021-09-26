@@ -18,7 +18,7 @@ class AppointmentPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->id == 1;
+        return $user->can('view any appointment');
     }
 
     /**
@@ -30,7 +30,7 @@ class AppointmentPolicy
      */
     public function view(User $user, Appointment $appointment)
     {
-        return $user->id == 1;
+        return $user->can('view appointment');
     }
 
     /**
@@ -41,7 +41,7 @@ class AppointmentPolicy
      */
     public function create(User $user)
     {
-        return $user->id == 1;
+        return $user->can('create appointment');
 
     }
 
@@ -54,7 +54,7 @@ class AppointmentPolicy
      */
     public function update(User $user, Appointment $appointment)
     {
-        return $user->id == 1;
+        return $user->can('update appointment');
     }
 
     /**
@@ -66,30 +66,6 @@ class AppointmentPolicy
      */
     public function delete(User $user, Appointment $appointment)
     {
-        return $user->id == 1;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Appointment $appointment)
-    {
-        return $user->id == 1;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Appointment $appointment)
-    {
-        return $user->id == 1;
+        return $user->can('delete appointment');
     }
 }

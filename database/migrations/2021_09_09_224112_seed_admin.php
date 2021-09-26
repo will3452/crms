@@ -20,5 +20,7 @@ class SeedAdmin extends Migration
             'email' => 'superadmin@crms.com',
             'password' => bcrypt('password'),
         ]);
+
+
     }
 }

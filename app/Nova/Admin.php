@@ -10,11 +10,21 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Admin extends Resource
 {
-    public static $group = "extra";
+    public static $group = "Admininstrator";
+
+    public function authorizedToDelete(Request $request)
+    {
+        return false;
+    }
+
+    public static function authorizedToCreate(Request $request)
+    {
+        return false;
+    }
 
     public static function label()
     {
-        return "Admin Account";
+        return "My Account";
     }
     /**
      * The model the resource corresponds to.
@@ -25,7 +35,7 @@ class Admin extends Resource
 
     public static function indexQuery(NovaRequest $request, $query)
     {
-        return $query->where('id', 1);
+        return $query->where('id', auth()->id());
     }
 
     /**
@@ -53,7 +63,6 @@ class Admin extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make(__('ID'), 'id')->sortable(),
             Text::make('Email')
                 ->rules(['required', 'unique:users,email,1']),
 

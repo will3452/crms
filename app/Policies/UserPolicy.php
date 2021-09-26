@@ -17,7 +17,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->id == 1;
+        return $user->can('view any user');
     }
 
     /**
@@ -29,7 +29,7 @@ class UserPolicy
      */
     public function view(User $user, User $userx)
     {
-        return $user->id == 1;
+        return $user->can('view user');
     }
 
     /**
@@ -40,7 +40,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->can('create user');
     }
 
     /**
@@ -52,7 +52,7 @@ class UserPolicy
      */
     public function update(User $user, User $userx)
     {
-        return $user->id == 1;
+        return $user->can('update user');
     }
 
     /**
@@ -64,30 +64,6 @@ class UserPolicy
      */
     public function delete(User $user, User $userx)
     {
-        return $user->id == 1;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $userx
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, User $userx)
-    {
-        return $user->id == 1;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $userx
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, User $userx)
-    {
-        return $user->id == 1;
+        return $user->can('delete user');
     }
 }

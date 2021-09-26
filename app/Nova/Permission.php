@@ -2,28 +2,44 @@
 
 namespace App\Nova;
 
-use App\Nova\Actions\MarkAsRead;
-use App\Nova\Lenses\UnreadMessages;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Date;
-use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\Text;
 
-class Message extends Resource
+class Permission extends Resource
 {
+    public static $group = "Admininstrator";
+
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Message::class;
+    public static $model = \App\Models\Permission::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'id';
+    public function title()
+    {
+        return $this->name . ' (' . $this->group . ')';
+    }
+
+    public function authorizedToDelete(Request $request)
+    {
+        return false;
+    }
+
+    public static function authorizedToCreate(Request $request)
+    {
+        return false;
+    }
+
+    public function authorizedToUpdate(Request $request)
+    {
+        return false;
+    }
 
     /**
      * The columns that should be searched.
@@ -32,6 +48,8 @@ class Message extends Resource
      */
     public static $search = [
         'id',
+        'name',
+        'group',
     ];
 
     /**
@@ -43,16 +61,11 @@ class Message extends Resource
     public function fields(Request $request)
     {
         return [
-            Date::make('Date', 'created_at')
-                ->exceptOnForms(),
+            Text::make('Name')
+                ->rules(['required', 'unique:permissions,name']),
 
-            BelongsTo::make('Sender', 'sender', User::class)
-                ->exceptOnForms(),
-
-            BelongsTo::make('Recepient', 'receiver', User::class),
-
-            Textarea::make('Body')
-                ->required(),
+            Text::make('Group')
+                ->rules(['required']),
         ];
     }
 
@@ -86,9 +99,7 @@ class Message extends Resource
      */
     public function lenses(Request $request)
     {
-        return [
-            UnreadMessages::make(),
-        ];
+        return [];
     }
 
     /**
@@ -99,10 +110,6 @@ class Message extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-            MarkAsRead::make(),
-        ];
+        return [];
     }
-
-    public static $group = "Admininstrator";
 }

@@ -2,28 +2,27 @@
 
 namespace App\Nova;
 
-use App\Nova\Actions\MarkAsRead;
-use App\Nova\Lenses\UnreadMessages;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Date;
-use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\Text;
 
-class Message extends Resource
+class Role extends Resource
 {
+    public static $group = "Admininstrator";
+
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Message::class;
+    public static $model = \App\Models\Role::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -31,7 +30,7 @@ class Message extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'name',
     ];
 
     /**
@@ -43,16 +42,10 @@ class Message extends Resource
     public function fields(Request $request)
     {
         return [
-            Date::make('Date', 'created_at')
-                ->exceptOnForms(),
+            Text::make('Name')
+                ->rules('unique:roles,name'),
 
-            BelongsTo::make('Sender', 'sender', User::class)
-                ->exceptOnForms(),
-
-            BelongsTo::make('Recepient', 'receiver', User::class),
-
-            Textarea::make('Body')
-                ->required(),
+            BelongsToMany::make('permissions'),
         ];
     }
 
@@ -86,9 +79,7 @@ class Message extends Resource
      */
     public function lenses(Request $request)
     {
-        return [
-            UnreadMessages::make(),
-        ];
+        return [];
     }
 
     /**
@@ -99,10 +90,6 @@ class Message extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-            MarkAsRead::make(),
-        ];
+        return [];
     }
-
-    public static $group = "Admininstrator";
 }

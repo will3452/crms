@@ -10,7 +10,7 @@ use Yna\NovaSwatches\Swatches;
 class Status extends Resource
 {
 
-    public static $group = "extra";
+    public static $group = "Admininstrator";
     /**
      * The model the resource corresponds to.
      *

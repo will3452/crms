@@ -18,7 +18,7 @@ class StatusPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->id == 1;
+        return $user->can('view any status');
     }
 
     /**
@@ -30,7 +30,7 @@ class StatusPolicy
      */
     public function view(User $user, Status $medicine)
     {
-        return $user->id == 1;
+        return $user->can('view status');
     }
 
     /**
@@ -41,7 +41,7 @@ class StatusPolicy
      */
     public function create(User $user)
     {
-        return $user->id == 1;
+        return $user->can('create status');
     }
 
     /**
@@ -53,7 +53,7 @@ class StatusPolicy
      */
     public function update(User $user, Status $medicine)
     {
-        return $user->id == 1;
+        return $user->can('update status');
     }
 
     /**
@@ -65,30 +65,6 @@ class StatusPolicy
      */
     public function delete(User $user, Status $medicine)
     {
-        return $user->id == 1;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Status  $medicine
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Status $medicine)
-    {
-        return $user->id == 1;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Status  $medicine
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Status $medicine)
-    {
-        return $user->id == 1;
+        return $user->can('delete status');
     }
 }
