@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Appointment;
+use App\Models\Status;
 use App\Nova\Metrics\NewPatient;
 use App\Nova\Metrics\PendingAppointments;
 use App\Nova\Metrics\UnreadMessages;
