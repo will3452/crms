@@ -1,15 +1,18 @@
 <?php
 
-use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\DiagnoseController;
-use App\Http\Controllers\ForgotPasswordController;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
-use App\Models\User;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DiagnoseController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Models\Appointment;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,4 +87,13 @@ Route::get('/check-account-is-existing', function () {
     $user->save();
     alert('Email verified!');
     return redirect('/home');
+});
+
+Route::get('/report', function (Request $request) {
+    $from = Carbon::parse($request->from);
+    $to = Carbon::parse($request->to);
+
+    $appointments =  Appointment::whereBetween('date', [$from, $to])->get();
+
+    return view('reports', compact('appointments'));
 });
