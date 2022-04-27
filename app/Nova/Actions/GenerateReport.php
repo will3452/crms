@@ -23,7 +23,7 @@ class GenerateReport extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
-        return Action::redirect("/report?from=$fields->from&to=$fields->to");
+        return Action::openInNewTab("/report?from=$fields->from&to=$fields->to");
     }
 
     /**
