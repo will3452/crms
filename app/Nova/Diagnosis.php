@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 
 class Diagnosis extends Resource
 {
@@ -51,6 +52,8 @@ class Diagnosis extends Resource
                 ->required(),
 
             BelongsToMany::make('Medicines'),
+
+            Textarea::make('Details'),
 
             BelongsToMany::make('Symptoms'),
 

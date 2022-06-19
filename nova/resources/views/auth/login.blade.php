@@ -23,6 +23,7 @@
     <div class="text-center font-bold text-2xl">
         Login as Doctor
     </div>
+    <img src="/login.svg" alt="" class="img-fluid mt-4">
     <div class="mb-6 {{ $errors->has('email') ? ' has-error' : '' }}">
         <label class="block font-bold mb-2" for="email">{{ __('Email Address') }}</label>
         <input class="form-control form-input form-input-bordered w-full" id="email" type="email" name="email" value="{{ old('email') }}" required autofocus>
